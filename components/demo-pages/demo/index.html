@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>demo-pages demo</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../paper-button/paper-button.html">
+  <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="../demo-pages.html">
+
+  <style is="custom-style" include="demo-pages-shared-styles">
+    demo-snippet {
+      max-width: 90em;
+    }
+  </style>
+</head>
+
+<body>
+  <demo-pages navigation>
+    <section title="paper-button">
+      <paper-button>page 1</paper-button>
+    </section>
+    <section title="paper icon button">
+      <demo-snippet>
+        <template>
+          <paper-icon-button icon="icons:accessibility"></paper-icon-button>
+        </template>
+      </demo-snippet>
+    </section>
+  </demo-pages>
+</body>
+
+</html>

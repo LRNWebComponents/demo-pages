@@ -1,0 +1,33 @@
+{
+  "name": "demo-pages",
+  "description": "A LRN element",
+  "main": "demo-pages.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.9.3",
+    "lrnsys-behaviors": "LRNWebComponents/lrnsys-behaviors#^1.0.0",
+    "materializecss-styles": "LRNWebComponents/materializecss-styles#^0.0.5",
+    "iron-pages": "PolymerElements/iron-pages#^2.1.0",
+    "app-route": "PolymerElements/app-route#^2.1.0",
+    "paper-button": "PolymerElements/paper-button#^2.1.0",
+    "paper-menu-button": "PolymerElements/paper-menu-button#^2.1.0",
+    "paper-listbox": "PolymerElements/paper-listbox#^2.1.0",
+    "paper-item": "PolymerElements/paper-item#^2.1.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "homepage": "https://github.com/LRNWebComponents/demo-pages",
+  "_release": "beccd880fc",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "beccd880fc1acb2f2215316bf7c1a498f6e724f7"
+  },
+  "_source": "https://github.com/LRNWebComponents/demo-pages.git",
+  "_target": "master",
+  "_originalSource": "LRNWebComponents/demo-pages",
+  "_direct": true
+}
