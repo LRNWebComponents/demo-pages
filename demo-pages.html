@@ -82,7 +82,6 @@ A LRN element
         const children = allChildren.filter((i) => i.nodeName === 'SECTION');
         // convert to navigation
         const navigation = children.map(i => i.getAttribute('title') || i.innerText);
-        console.log(navigation)
         // if there ar nav elements
         if (navigation) {
           this.set('__navigation', []);
