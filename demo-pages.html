@@ -5,8 +5,6 @@
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../app-route/app-location.html">
 <link rel="import" href="../paper-button/paper-button.html">
-<link rel="import" href="../iron-demo-helpers/demo-pages-shared-styles.html">
-<link rel="import" href="../iron-demo-helpers/demo-snippet.html">
 
 <!--
 `demo-pages`
@@ -41,17 +39,17 @@ A LRN element
     <paper-menu-button no-animations>
       <div slot="dropdown-trigger">
         <div id="demo-label">Demo</div>
-        <paper-button raised>[[__activeSelectionText(selected, __navigation)]] <iron-icon icon="icons:expand-more"></iron-icon></paper-button>
+        <paper-button raised>[[selected]] <iron-icon icon="icons:expand-more"></iron-icon></paper-button>
       </div>
       <paper-listbox slot="dropdown-content">
         <template is="dom-repeat" items="[[__navigation]]">
-          <paper-item data-index$="[[index]]" on-click="__updateActiveSection">[[item]]</paper-item>
+          <paper-item data-index$="[[item]]" on-click="__updateActiveSection">[[item]]</paper-item>
         </template>
       </paper-listbox>
     </paper-menu-button>
 
 
-    <iron-pages selected="{{selected}}">
+    <iron-pages selected="{{selected}}" attr-for-selected="data-demo">
       <slot id="slot"></slot>
     </iron-pages>
 
@@ -75,7 +73,6 @@ A LRN element
          */
         selected: {
           type: String,
-          value: 0,
           notify: true,
         },
         __route: {
@@ -96,21 +93,35 @@ A LRN element
         // get all children
         const children = allChildren.filter((i) => i.nodeName === 'SECTION');
         // convert to navigation
-        const navigation = children.map(i => i.getAttribute('title') || i.innerText);
+        const navigation = children.map(i => i.getAttribute('data-demo') || i.innerText);
         // if there ar nav elements
         if (navigation) {
           this.set('__navigation', []);
           this.set('__navigation', navigation);
+
+          if (!window.location.hash) {
+            this.set('selected', navigation[0]);
+          }
         }
+
+        window.addEventListener('hashchange', (e) => {
+          console.log(e);
+        });
       },
 
       /**
-       * Trigger selected state change
+       * Trigger selected state change.  We are going to use
+       * the window hash since that's what iron-component-pages
+       * uses.
        */
       updateSelected: function (selected) {
-        this.set('__route.__queryParams', {
-          demo: selected
-        })
+        // get the url hash that contains what element is selected
+        window.location.hash = selected;
+        // set the route.path to trigger an update, letting the rest
+        // of our application know that the route has changed. It's
+        // a hack because route doesn't inherintly work with hash
+        // changes.
+        this.set('__route.path', window.location.pathname);
       },
 
       /**
@@ -130,19 +141,10 @@ A LRN element
        * attribute and update the internal selected state
        */
       __routeChanged: function (route) {
-        const params = route.__queryParams;
-        const selected = params.demo || null;
-        if (selected) {
-          this.selected = selected;
-        }
-      },
-
-      /**
-       * Retrieve the human readable name of the selected demo.
-       */
-      __activeSelectionText: function (selected, navigation) {
-        if (navigation) {
-          return navigation[Number(selected)];
+        let hash = window.location.hash;
+        if (hash) {
+          hash = hash.replace('\#', '');
+          this.selected = hash;
         }
       },
 

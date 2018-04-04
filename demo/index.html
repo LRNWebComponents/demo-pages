@@ -11,9 +11,7 @@
 
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../../paper-button/paper-button.html">
-  <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
-  <link rel="import" href="../demo-pages.html">
+  <link rel="import" href="../demo-imports.html">
 
   <style is="custom-style" include="demo-pages-shared-styles">
     demo-snippet {
@@ -24,13 +22,20 @@
 
 <body>
   <demo-pages navigation>
-    <section title="paper-button">
-      <paper-button>page 1</paper-button>
+    <section data-demo="demo-pages">
+      <paper-button>This is how demo pages works</paper-button>
     </section>
-    <section title="paper icon button">
+    <section data-demo="test-element-1">
       <demo-snippet>
         <template>
-          <paper-icon-button icon="icons:accessibility"></paper-icon-button>
+          <test-element-1></test-element-1>
+        </template>
+      </demo-snippet>
+    </section>
+    <section data-demo="test-element-2">
+      <demo-snippet>
+        <template>
+          <test-element-2></test-element-2>
         </template>
       </demo-snippet>
     </section>
