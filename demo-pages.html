@@ -1,6 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-pages/iron-pages.html">
-<link rel="import" href="../app-route/app-route.html">
+<link rel="import" href="../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../app-route/app-location.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../iron-demo-helpers/demo-pages-shared-styles.html">
@@ -19,27 +21,40 @@ A LRN element
       :host {
         display: block;
       }
+
+      #navigation {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      #demo-label {
+        display: inline;
+        display: inline-flex;
+      }
     </style>
 
     <app-location route="{{__route}}"></app-location>
-    <app-route
-      id="route"
-      route="{{__route}}"
-      pattern=":page"
-    >
+    <app-route id="route" route="{{__route}}" pattern=":page">
     </app-route>
 
-    
-    <template is="dom-if" if="[[navigation]]">
-      <template is="dom-repeat" items="[[__navigation]]">
-        <paper-button data-index$="[[index]]" on-click="__updateActiveSection">[[item]]</paper-button>
-      </template>
-    </template>
+    <paper-menu-button no-animations>
+      <div slot="dropdown-trigger">
+        <div id="demo-label">Demo</div>
+        <paper-button raised>[[__activeSelectionText(selected, __navigation)]] <iron-icon icon="icons:expand-more"></iron-icon></paper-button>
+      </div>
+      <paper-listbox slot="dropdown-content">
+        <template is="dom-repeat" items="[[__navigation]]">
+          <paper-item data-index$="[[index]]" on-click="__updateActiveSection">[[item]]</paper-item>
+        </template>
+      </paper-listbox>
+    </paper-menu-button>
+
 
     <iron-pages selected="{{selected}}">
       <slot id="slot"></slot>
     </iron-pages>
-    
+
   </template>
 
   <script>
@@ -93,9 +108,9 @@ A LRN element
        * Trigger selected state change
        */
       updateSelected: function (selected) {
-        this.$.route.queryParams = {
+        this.set('__route.__queryParams', {
           demo: selected
-        }
+        })
       },
 
       /**
@@ -122,6 +137,14 @@ A LRN element
         }
       },
 
+      /**
+       * Retrieve the human readable name of the selected demo.
+       */
+      __activeSelectionText: function (selected, navigation) {
+        if (navigation) {
+          return navigation[Number(selected)];
+        }
+      },
 
     });
   </script>
