@@ -1,3 +1,5 @@
+This element is kinda of worthless if you are using Polymer iron-component-page.  Here is the docs for specifying mulitple demos for that element: https://www.polymer-project.org/1.0/docs/tools/documentation.
+
 <!--
 ```
 <custom-element-demo>
